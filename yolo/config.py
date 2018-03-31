@@ -17,12 +17,15 @@ WEIGHTS_DIR = os.path.join(PASCAL_PATH, 'weights')
 WEIGHTS_FILE = None
 # WEIGHTS_FILE = os.path.join(DATA_PATH, 'weights', 'YOLO_small.ckpt')
 
-CLASSES = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
+CLASSES = ['penguin', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
            'car', 'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse',
            'motorbike', 'person', 'pottedplant', 'sheep', 'sofa',
            'train', 'tvmonitor']
 
 FLIPPED = True
+
+# LOCATIONS = ['DAMOa', 'GEORa', 'HALFb', 'HALFc', 'LOCKb', 'NEKOc', 'PETEc', 'PETEd', 'PETEf', 'SPIGa']
+LOCATIONS = ['DAMOa']
 
 
 #
@@ -53,15 +56,15 @@ GPU = ''
 
 LEARNING_RATE = 0.0001
 
-DECAY_STEPS = 30000
+DECAY_STEPS = 8000
 
 DECAY_RATE = 0.1
 
 STAIRCASE = True
 
-BATCH_SIZE = 45
+BATCH_SIZE = 10
 
-MAX_ITER = 15000
+MAX_ITER = 4000
 
 SUMMARY_ITER = 10
 

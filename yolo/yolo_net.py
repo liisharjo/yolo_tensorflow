@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import numpy as np
 import tensorflow as tf
 import yolo.config as cfg
@@ -15,7 +19,7 @@ class YOLONet(object):
         self.boxes_per_cell = cfg.BOXES_PER_CELL
         self.output_size = (self.cell_size * self.cell_size) *\
             (self.num_class + self.boxes_per_cell * 5)
-        self.scale = 1.0 * self.image_size / self.cell_size
+        # self.scale = 1.0 * self.image_size / self.cell_size
         self.boundary1 = self.cell_size * self.cell_size * self.num_class
         self.boundary2 = self.boundary1 +\
             self.cell_size * self.cell_size * self.boxes_per_cell
@@ -241,5 +245,5 @@ class YOLONet(object):
 
 def leaky_relu(alpha):
     def op(inputs):
-        return tf.nn.leaky_relu(inputs, alpha=alpha, name='leaky_relu')
+        return tf.maximum(alpha * inputs, inputs, name='leaky_relu')
     return op
