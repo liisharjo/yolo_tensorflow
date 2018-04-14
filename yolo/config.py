@@ -17,15 +17,15 @@ WEIGHTS_DIR = os.path.join(PASCAL_PATH, 'weights')
 WEIGHTS_FILE = None
 # WEIGHTS_FILE = os.path.join(DATA_PATH, 'weights', 'YOLO_small.ckpt')
 
-CLASSES = ['penguin', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
+CLASSES = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
            'car', 'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse',
            'motorbike', 'person', 'pottedplant', 'sheep', 'sofa',
            'train', 'tvmonitor']
 
 FLIPPED = True
 
-# LOCATIONS = ['DAMOa', 'GEORa', 'HALFb', 'HALFc', 'LOCKb', 'NEKOc', 'PETEc', 'PETEd', 'PETEf', 'SPIGa']
-LOCATIONS = ['DAMOa']
+LOCATIONS = ['DAMOa', 'GEORa', 'HALFb', 'HALFc', 'LOCKb', 'NEKOc', 'PETEc', 'PETEd', 'PETEf', 'SPIGa']
+# LOCATIONS = ['DAMOa']
 
 
 #
@@ -43,7 +43,7 @@ ALPHA = 0.1
 DISP_CONSOLE = False
 
 OBJECT_SCALE = 1.0
-NOOBJECT_SCALE = 1.0
+NOOBJECT_SCALE = 0.5
 CLASS_SCALE = 2.0
 COORD_SCALE = 5.0
 
@@ -56,7 +56,7 @@ GPU = ''
 
 LEARNING_RATE = 0.0001
 
-DECAY_STEPS = 8000
+DECAY_STEPS = 10000
 
 DECAY_RATE = 0.1
 
@@ -64,7 +64,7 @@ STAIRCASE = True
 
 BATCH_SIZE = 10
 
-MAX_ITER = 4000
+MAX_ITER = 5000
 
 SUMMARY_ITER = 10
 
@@ -75,6 +75,6 @@ SAVE_ITER = 1000
 # test parameter
 #
 
-THRESHOLD = 0.2
+THRESHOLD = 0.04
 
-IOU_THRESHOLD = 0.5
+IOU_THRESHOLD = 0.1

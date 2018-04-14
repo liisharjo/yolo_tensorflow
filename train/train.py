@@ -84,8 +84,6 @@ class Solver(object):
 
                     log_str = 'Loss: ' + str(loss)
                     print(log_str)
-                    with file_io.FileIO(os.path.join(self.output_dir, str(step) + '.txt'), mode='w') as f:
-                        f.write(log_str)
 
                 else:
                     train_timer.tic()

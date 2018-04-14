@@ -3,9 +3,11 @@ import cv2
 import argparse
 import numpy as np
 import tensorflow as tf
+import pickle
 import yolo.config as cfg
 from yolo.yolo_net import YOLONet
 from utils.timer import Timer
+from tensorflow.python.lib.io import file_io
 
 
 class Detector(object):
@@ -26,11 +28,13 @@ class Detector(object):
             self.cell_size * self.cell_size * self.boxes_per_cell
 
         self.sess = tf.Session()
-        self.sess.run(tf.global_variables_initializer())
+        # self.sess.run(tf.global_variables_initializer())
 
         print('Restoring weights from: ' + self.weights_file)
         self.saver = tf.train.Saver()
         self.saver.restore(self.sess, self.weights_file)
+        saver = tf.train.import_meta_graph('yolo-8000.meta')
+        saver.restore(self.sess, tf.train.latest_checkpoint('./'))
 
     def draw_result(self, img, result):
         for i in range(len(result)):
@@ -169,9 +173,9 @@ class Detector(object):
 
             ret, frame = cap.read()
 
-    def image_detector(self, imname, wait=0):
+    def image_detector(self, imname, files_path, wait=0):
         detect_timer = Timer()
-        image = cv2.imread(imname)
+        image = cv2.imread(files_path + 'ReducedImages/sPETEf/' + imname)
 
         detect_timer.tic()
         result = self.detect(image)
@@ -180,8 +184,9 @@ class Detector(object):
             detect_timer.average_time))
 
         self.draw_result(image, result)
-        cv2.imshow('Image', image)
-        cv2.waitKey(wait)
+        #cv2.imshow('Image', image)
+        cv2.imwrite(files_path + 'test/' + imname, image)
+        #cv2.waitKey(wait)
 
 
 def main():
@@ -190,21 +195,31 @@ def main():
     parser.add_argument('--weight_dir', default='weights', type=str)
     parser.add_argument('--data_dir', default="data", type=str)
     parser.add_argument('--gpu', default='', type=str)
+    parser.add_argument('--files_path', default='', type=str)
     args = parser.parse_args()
+    files_path = args.files_path
 
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
     yolo = YOLONet(False)
-    weight_file = os.path.join(args.data_dir, args.weight_dir, args.weights)
+    weight_file = os.path.join('..', args.data_dir, args.weight_dir, args.weights)
     detector = Detector(yolo, weight_file)
 
-    # detect from camera
-    # cap = cv2.VideoCapture(-1)
-    # detector.camera_detector(cap)
 
     # detect from image file
-    imname = 'test/person.jpg'
-    detector.image_detector(imname)
+    # imname = '../test/penguin.JPG'
+    # detector.image_detector(imname)
+
+    images_file = files_path + 'TestImages/PETEf_test.pickle'
+    file_stream = file_io.FileIO(images_file, mode='r+')
+    images = pickle.load(file_stream)
+    counter = 0
+    for im in images.keys():
+        detector.image_detector(im, files_path)
+        print(im)
+        counter += 1
+        if counter > 100:
+            break
 
 
 if __name__ == '__main__':

@@ -49,7 +49,7 @@ class pascal_voc(object):
                 count += 1
                 self.cursor += 1
                 if self.cursor >= len(self.image_names):
-                    # np.random.shuffle(self.gt_labels)
+                    np.random.shuffle(self.image_names)
                     self.cursor = 0
                     self.epoch += 1
         return images, labels
@@ -102,7 +102,7 @@ class pascal_voc(object):
                         continue
                     label[y_ind, x_ind, 0] = 1
                     label[y_ind, x_ind, 1:5] = boxes
-                    label[y_ind, x_ind, 6] = 1
+                    label[y_ind, x_ind, 7] = 1
                 gt_labels[name + '.JPG'] = label
             return gt_labels
 
@@ -114,4 +114,5 @@ class pascal_voc(object):
             loc_images = pickle.load(file_stream)
             images.update(loc_images)
             self.image_names.extend(list(loc_images.keys()))
+        np.random.shuffle(self.image_names)
         self.images = images
