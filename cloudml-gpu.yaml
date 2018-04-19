@@ -2,4 +2,6 @@ trainingInput:
   scaleTier: CUSTOM
   # standard_gpu provides 1 GPU. Change to complex_model_m_gpu for 4 GPUs
   masterType: complex_model_l_gpu
+  workerType: complex_model_l_gpu
+  parameterServerType: large_model
   runtimeVersion: "1.0"

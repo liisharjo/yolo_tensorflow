@@ -105,6 +105,7 @@ class Solver(object):
                     self.output_dir))
                 self.saver.save(
                     self.sess, self.ckpt_file, global_step=self.global_step)
+        self.saver.save(self.sess, self.ckpt_file)
 
     def save_cfg(self):
 

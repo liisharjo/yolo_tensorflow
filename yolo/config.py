@@ -22,6 +22,9 @@ CLASSES = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
            'motorbike', 'person', 'pottedplant', 'sheep', 'sofa',
            'train', 'tvmonitor']
 
+#CLASSES = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
+#           'car', 'cat', 'chair', 'cow']
+
 FLIPPED = True
 
 LOCATIONS = ['DAMOa', 'GEORa', 'HALFb', 'HALFc', 'LOCKb', 'NEKOc', 'PETEc', 'PETEd', 'PETEf', 'SPIGa']
@@ -56,7 +59,7 @@ GPU = ''
 
 LEARNING_RATE = 0.0001
 
-DECAY_STEPS = 10000
+DECAY_STEPS = 20000
 
 DECAY_RATE = 0.1
 
@@ -64,7 +67,7 @@ STAIRCASE = True
 
 BATCH_SIZE = 10
 
-MAX_ITER = 5000
+MAX_ITER = 10000
 
 SUMMARY_ITER = 10
 
@@ -75,6 +78,6 @@ SAVE_ITER = 1000
 # test parameter
 #
 
-THRESHOLD = 0.04
+THRESHOLD = 0.2
 
-IOU_THRESHOLD = 0.1
+IOU_THRESHOLD = 0.4

@@ -16,7 +16,9 @@ class pascal_voc(object):
         # self.data_path = os.path.join(self.devkil_path, 'VOC2007')
         self.data_path = cfg.DATA_PATH
         self.annotations_path = os.path.join(self.data_path, 'annotations')
+        self.annotations_path = os.path.join(self.annotations_path, 'larger')
         self.images_path = os.path.join(self.data_path, 'images')
+        self.images_path = os.path.join(self.images_path, 'old')
         self.cache_path = cfg.CACHE_PATH
         self.batch_size = cfg.BATCH_SIZE
         self.image_size = cfg.IMAGE_SIZE
@@ -44,7 +46,8 @@ class pascal_voc(object):
         while count < self.batch_size:
             imname = str(self.image_names[self.cursor])
             if imname in self.images:
-                images[count, :, :, :] = self.images[imname]
+                reduced_image = (self.images[imname] / 255.0) * 2.0 - 1.0
+                images[count, :, :, :] = reduced_image
                 labels[count, :, :, :] = self.gt_labels[imname]
                 count += 1
                 self.cursor += 1
