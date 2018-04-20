@@ -35,7 +35,7 @@ class Detector(object):
         self.saver = tf.train.Saver()
         self.saver.restore(self.sess, self.weights_file)
         # use trained model
-        self.saver = tf.train.import_meta_graph('yolo-5000.meta')
+        self.saver = tf.train.import_meta_graph('yolo.meta')
         self.saver.restore(self.sess, tf.train.latest_checkpoint('./'))
 
     def draw_result(self, img, result):
@@ -248,6 +248,7 @@ def create_results_file():
         results_file_path = os.path.join(os.pardir, 'utils', 'results', location + '.json')
         with open(results_file_path, 'w') as results_file:
             json.dump(results, results_file)
+        results = {}
 
 
 if __name__ == '__main__':
